@@ -1,3 +1,13 @@
-h1{
-    color:red;
+.navbar{
+    border-style: solid;
+    border-width: 1px;
+    border-color: blue;
+    padding: 20px;
+    text-align: center;
+}
+
+.navbar a{
+    padding: 20px;
+    text-decoration: none;
+    color: black;
 }

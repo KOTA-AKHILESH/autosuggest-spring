@@ -1,24 +1,230 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AUTO SUGGEST</title>
-    
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AUTO SUGGEST</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html,body{
+    width:100%;
+    height:100%;
+    font-family:Arial,sans-serif;
+    background-color:#021326;
+}
+
+.card{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    width:85%;
+    min-height:85%;
+    text-align:center;
+    padding:40px;
+    border-radius:30px;
+    background-color:#0B1F3A;
+}
+
+.gear{
+    position:absolute;
+    font-size:30px;
+    top:25px;
+    left:25px;
+    cursor:pointer;
+}
+
+.status{
+    position:absolute;
+    top:25px;
+    right:35px;
+    font-size:20px;
+    color:white;
+}
+
+h1{
+    margin-top:80px;
+    font-size:55px;
+    color:white;
+}
+
+.first{
+    color:aqua;
+}
+
+.tagline{
+    color:goldenrod;
+    font-size:24px;
+    margin-top:30px;
+}
+
+.search-container{
+    display:block;
+    margin:30px auto;
+    width:80%;
+    max-width:900px;
+}
+
+.search-icon{
+    font-size:24px;
+    margin-right:10px;
+}
+
+input{
+    width:500px;
+    max-width:90%;
+    padding:14px;
+    font-size:18px;
+    border:2px solid blue;
+    border-radius:10px;
+    outline:none;
+}
+
+input:focus{
+    border-color:aqua;
+}
+
+.search-suggestions{
+    width:500px;
+    max-width:90%;
+    margin:10px auto;
+    background:#1f2f4d;
+    border-radius:10px;
+    overflow:hidden;
+    text-align:left;
+}
+
+.suggestion-item{
+    padding:12px 15px;
+    border-bottom:1px solid rgba(255,255,255,0.1);
+    color:white;
+    cursor:pointer;
+}
+
+.suggestion-item:hover{
+    background:#2f446d;
+}
+
+.brand{
+    margin-top:30px;
+    color:white;
+}
+</style>
 </head>
+
 <body>
-    
-    <span>&#9881;</span>
-    <span>&#x2022; online | &#x1F552; - ms</span>
-    
-    <h1>Auto Suggest</h1>
-    <P>One million Phrases.Four algoruthms.Prefix Based Auto Suggest.</P>
-    <span>&#128269;</span>
-    <input type="text" placeholder="start typing to search phrases....">
 
+<div class="card">
 
-    
+    <span class="gear">⚙</span>
 
+    <span class="status">
+        ● Online
+    </span>
+
+    <h1>
+        <span class="first">BEING</span>INFINITY
+    </h1>
+
+    <p class="tagline">
+        One million phrases. Four algorithms.
+        Prefix-based auto suggest.
+    </p>
+
+    <div class="search-container">
+        <span class="search-icon">🔍</span>
+
+        <input
+            type="text"
+            id="search-box"
+            placeholder="Start typing to search phrases..."
+            oninput="getSearchSuggestion()">
+    </div>
+
+    <div id="search-suggestions" class="search-suggestions"></div>
+
+</div>
+
+<script>
+async function getSearchSuggestion() {
+
+    const searchBox = document.getElementById("search-box");
+    const searchSuggestions = document.getElementById("search-suggestions");
+
+    const userInput = searchBox.value.trim();
+
+    if (userInput === "") {
+        searchSuggestions.innerHTML = "";
+        return;
+    }
+
+    const url =
+        "https://autosuggest-backend.onrender.com/api/autosuggest?q=" +
+        encodeURIComponent(userInput) +
+        "&algorithm=brute&limit=10&weighted=false";
+
+    try {
+
+        const response = await fetch(url);
+
+        if (!response.ok) {
+            throw new Error("Network response was not ok");
+        }
+
+        const data = await response.json();
+
+        console.log("API Response:", data);
+
+        searchSuggestions.innerHTML = "";
+
+        let suggestions = [];
+
+        if (Array.isArray(data)) {
+            suggestions = data;
+        }
+        else if (data.suggestions) {
+            suggestions = data.suggestions;
+        }
+        else if (data.results) {
+            suggestions = data.results;
+        }
+
+        suggestions.forEach(item => {
+
+            const suggestion = document.createElement("div");
+            suggestion.className = "suggestion-item";
+            suggestion.textContent = item;
+
+            suggestion.addEventListener("click", () => {
+                searchBox.value = item;
+                searchSuggestions.innerHTML = "";
+            });
+
+            searchSuggestions.appendChild(suggestion);
+        });
+
+    } catch (error) {
+        console.error("Error:", error);
+
+        searchSuggestions.innerHTML =
+            '<div class="suggestion-item">Unable to load suggestions</div>';
+    }
+}
+</script>
 
 </body>
-</html>
+
+console.log("Status:", response.status);
+
+const text = await response.text();
+console.log("Raw Response:", text);
+
+const data = JSON.parse(text);
+console.log(data);

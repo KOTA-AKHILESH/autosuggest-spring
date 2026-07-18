@@ -1,64 +1,63 @@
-.navbar{
+/* =========================
+   DARK MODE (DEFAULT)
+   ========================= */
+
+body {
+    margin: 0;
+    background: linear-gradient(to right, #021326, #0B1F3A);
+    color: #F8F9FA;
+    font-family: Arial, sans-serif;
+    transition: all 0.3s ease;
+}
+
+.navbar {
     border-bottom: 1px solid #D4AF37;
     padding: 35px 10px;
     text-align: center;
     background-color: #021326;
+    transition: all 0.3s ease;
 }
 
-.navbar a{
-    padding: 50px;
+.navbar a {
+    padding: 20px;
     text-decoration: none;
     color: #F8F9FA;
     font-size: 25px;
-    transition: 0.3s ease;
-    transform: scale(1.05);
+    transition: all 0.3s ease;
 }
 
-.navbar a:hover{
+.navbar a:hover {
     color: #021326;
     background-color: #D4AF37;
     border-radius: 8px;
-    /* transform: scale(1.05); */
-    width: 100px;
-    height: 100px;
-    
 }
 
-body{
-    margin: 0;
-    background: linear-gradient(to right, #021326, #0B1F3A);
-    color: #F8F9FA;
-}
-
-.card{
+.card {
     border: 2px solid #D4AF37;
     width: 350px;
     border-radius: 30px;
     text-align: center;
-    margin-top: 70px;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 70px auto;
     padding-bottom: 20px;
     overflow: hidden;
     background-color: #0B1F3A;
     box-shadow: 0 8px 25px rgba(212, 175, 55, 0.15);
+    transition: all 0.3s ease;
 }
 
-.card img{
+.card img {
     width: 80%;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 20px auto;
+    display: block;
+    border-radius: 12px;
 }
 
-.card h2{
+.card h3,
+.card p {
     color: #F8F9FA;
 }
 
-.card p{
-    color: #B8C2CC;
-}
-
-.card button{
+.card button {
     border: none;
     padding: 12px;
     width: 75%;
@@ -67,16 +66,62 @@ body{
     color: #021326;
     font-weight: bold;
     cursor: pointer;
-    transition: 0.3s ease;
+    transition: all 0.3s ease;
 }
 
-.card button:hover{
+.card button:hover {
     background-color: #E0BD4F;
-}
-.card button:hover{
-   transform: scale(1.05);
+    transform: scale(1.05);
 }
 
-.card button:active{
-   transform: scale(.95);
+.card button:active {
+    transform: scale(0.95);
+}
+
+/* =========================
+   LIGHT MODE
+   ========================= */
+
+.light-mode {
+    background: linear-gradient(to right, #f8f9fa, #e9ecef);
+    color: #021326;
+}
+
+.light-mode .navbar {
+    background-color: #ffffff;
+    border-bottom: 1px solid #021326;
+}
+
+.light-mode .navbar a {
+    color: #021326;
+}
+
+.light-mode .navbar a:hover {
+    background-color: #021326;
+    color: #D4AF37;
+}
+
+.light-mode .card {
+    background-color: #ffffff;
+    border: 2px solid #021326;
+    box-shadow: 0 8px 25px rgba(2, 19, 38, 0.15);
+}
+
+.light-mode .card h3,
+.light-mode .card p {
+    color: #021326;
+}
+
+.light-mode .card button {
+    background-color: #021326;
+    color: #D4AF37;
+}
+
+.light-mode .card button:hover {
+    background-color: #0B1F3A;
+}
+
+.light-mode #theme-btn {
+    background-color: #021326;
+    color: #D4AF37;
 }

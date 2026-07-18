@@ -84,4 +84,26 @@ userAge.innerHTML = "Age: " + usersData.dob.age;
             console.log("Error:", err);
         });
 }
+function toggleTheme() {
+    document.body.classList.toggle("light-mode");
+
+    const btn = document.getElementById("theme-btn");
+
+    if (document.body.classList.contains("light-mode")) {
+        btn.innerHTML = "🌙 Dark Mode";
+        localStorage.setItem("theme", "light");
+    } else {
+        btn.innerHTML = "☀️ White Mode";
+        localStorage.setItem("theme", "dark");
+    }
+}
+
+window.onload = function () {
+    const theme = localStorage.getItem("theme");
+
+    if (theme === "light") {
+        document.body.classList.add("light-mode");
+        document.getElementById("theme-btn").innerHTML = "🌙 Dark Mode";
+    }
+};
 

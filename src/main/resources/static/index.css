@@ -11,3 +11,7 @@
     text-decoration: none;
     color: black;
 }
+.navbar a:hover{
+    color:black;
+    background-color: aqua;
+}

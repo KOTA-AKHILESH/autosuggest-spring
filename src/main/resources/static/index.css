@@ -11,12 +11,14 @@
     color: #F8F9FA;
     font-size: 25px;
     transition: 0.3s ease;
+    transform: scale(1.05);
 }
 
 .navbar a:hover{
     color: #021326;
     background-color: #D4AF37;
     border-radius: 8px;
+    transform: scale(1.05);
 }
 
 body{
@@ -67,4 +69,11 @@ body{
 
 .card button:hover{
     background-color: #E0BD4F;
+}
+.card button:hover{
+   transform: scale(1.05);
+}
+
+.card button:active{
+   transform: scale(.95);
 }

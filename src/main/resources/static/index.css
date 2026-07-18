@@ -18,7 +18,10 @@
     color: #021326;
     background-color: #D4AF37;
     border-radius: 8px;
-    transform: scale(1.05);
+    /* transform: scale(1.05); */
+    width: 100px;
+    height: 100px;
+    
 }
 
 body{

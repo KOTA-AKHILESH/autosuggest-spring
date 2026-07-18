@@ -1,31 +1,48 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>User Card</title>
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
-        <div class="navbar">
-        <a href="">Home 🏡</a>
-        <a href="https://github.com/">Github </a>
-        <a href="https://leetcode.com/">Leetcode</a>
-        <a href="">Autosuggest</a>
+
+    <div class="navbar">
+        <a href="#">Home 🏡</a>
+        <a href="https://github.com/" target="_blank">Github</a>
+        <a href="https://leetcode.com/" target="_blank">Leetcode</a>
+        <a href="#">Autosuggest</a>
     </div>
+
     <div class="card">
-        <img id="user-image" src="john.png" alt="image not found">
+        <img
+            id="user-image"
+            src="john.png"
+            alt="User Image"
+            width="200"
+        >
+
         <h3 id="user-name">John Doe</h3>
+
+        <p id="user-gender">Male ♂️</p>
+
         <p id="user-country">USA</p>
 
-<p id="user-college">Stanford University</p>
-<p id="user-gender">Male♂️</p>
-<button onclick="toggle()">👤Toggle User</button>
-        <br>
-        <br>
-        <button>🎲 Random User</button>
+        
+
+        <p id="user-age">AGE: 30</p>
+
+        <button onclick="toggle()">👤 Toggle User</button>
+
+        <br><br>
+
+        <button onclick="randomuser()">🎲 Random User</button>
     </div>
-    
+
     <script src="index.js"></script>
 
 </body>
+</html>
+

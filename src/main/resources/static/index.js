@@ -1,25 +1,26 @@
-console.log("hello from js");
+
+console.log("Hello from JS");
 
 var users = [
     {
         name: "John Doe",
-        gender: "Male♂️",
+        gender: "Male ♂️",
         country: "USA",
-        college: "Stanford University",
+        age: 30,
         img: "john.png"
     },
     {
         name: "Jane Doe",
-        gender: "Female♀️",
+        gender: "Female ♀️",
         country: "Canada",
-        college: "University of Toronto",
+        age: 25,
         img: "jane.png"
-    }, 
+    },
     {
         name: "Kota Akhilesh",
-        gender: "Male♂️",
+        gender: "Male ♂️",
         country: "India",
-        college: "VNR VJIET",
+        age: 18,
         img: "akhil.jpeg"
     }
 ];
@@ -31,9 +32,56 @@ function toggle() {
 
     id = (id + 1) % users.length;
 
-    document.getElementById("user-image").src = users[id].img;
-    document.getElementById("user-name").innerHTML = users[id].name;
-    document.getElementById("user-gender").innerHTML = users[id].gender;
-    document.getElementById("user-country").innerHTML = users[id].country;
-    document.getElementById("user-college").innerHTML = users[id].college;
+    var userImage = document.getElementById("user-image");
+    userImage.src = users[id].img;
+
+    var userName = document.getElementById("user-name");
+    userName.innerHTML = users[id].name;
+
+    var userGender = document.getElementById("user-gender");
+    userGender.innerHTML = users[id].gender;
+
+    var userCountry = document.getElementById("user-country");
+    userCountry.innerHTML = users[id].country;
+
+    var userAge = document.getElementById("user-age");
+   userAge.innerHTML = "Age: " + users[id].age;
 }
+
+function randomuser() {
+    fetch("https://randomuser.me/api/")
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(data) {
+            var usersData = data.results[0];
+
+            var userImage = document.getElementById("user-image");
+            userImage.src = usersData.picture.large;
+
+            var userName = document.getElementById("user-name");
+            userName.innerHTML =
+                usersData.name.first + " " + usersData.name.last;
+
+            var userGender = document.getElementById("user-gender");
+
+var genderSymbol = "";
+if (usersData.gender === "male") {
+    genderSymbol = " ♂️";
+} else if (usersData.gender === "female") {
+    genderSymbol = " ♀️";
+}
+
+userGender.innerHTML = usersData.gender + genderSymbol;
+
+            var userCountry = document.getElementById("user-country");
+            userCountry.innerHTML = usersData.location.country;
+
+            var userAge = document.getElementById("user-age");
+userAge.innerHTML = "Age: " + usersData.dob.age;
+        })
+        .catch(function(err) {
+            console.log("Error:", err);
+        });
+}
+

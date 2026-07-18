@@ -4,14 +4,21 @@
     border-color: blue;
     padding: 20px;
     text-align: center;
+    background-color: #030712;
+    
 }
 
 .navbar a{
-    padding: 20px;
-    text-decoration: none;
-    color: black;
+    padding: 50px;
+    text-decoration:none;
+     color: #E5E7EB;
+    font-size: 25px;
 }
 .navbar a:hover{
-    color:black;
-    background-color: aqua;
+    color:goldenrod;
+    background-color: #1D4ED8;
+}
+body{
+    margin: 0px;
+    background-color: #111827;
 }

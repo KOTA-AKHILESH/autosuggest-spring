@@ -1,7 +1,6 @@
-
 console.log("Hello from JS");
 
-var users = [
+const users = [
     {
         name: "John Doe",
         gender: "Male ♂️",
@@ -25,65 +24,124 @@ var users = [
     }
 ];
 
-var id = 0;
+let id = 0;
+
+/* =========================
+   RANDOM USER HISTORY
+   ========================= */
+
+let randomUserHistory = [];
+let historyIndex = -1;
+const MAX_HISTORY = 10;
+
+/* =========================
+   DISPLAY LOCAL USER
+   ========================= */
+
+function displayUser(user) {
+    document.getElementById("user-image").src = user.img;
+    document.getElementById("user-name").innerHTML = user.name;
+    document.getElementById("user-gender").innerHTML = user.gender;
+    document.getElementById("user-country").innerHTML = user.country;
+    document.getElementById("user-age").innerHTML =
+        "Age: " + user.age;
+}
+
+/* =========================
+   DISPLAY RANDOM USER
+   ========================= */
+
+function displayRandomUser(user) {
+    const genderSymbol =
+        user.gender === "male" ? " ♂️" : " ♀️";
+
+    document.getElementById("user-image").src =
+        user.picture.large;
+
+    document.getElementById("user-name").innerHTML =
+        `${user.name.first} ${user.name.last}`;
+
+    document.getElementById("user-gender").innerHTML =
+        user.gender + genderSymbol;
+
+    document.getElementById("user-country").innerHTML =
+        user.location.country;
+
+    document.getElementById("user-age").innerHTML =
+        "Age: " + user.dob.age;
+}
+
+/* =========================
+   TOGGLE LOCAL USERS
+   ========================= */
 
 function toggle() {
-    console.log("Hii");
-
     id = (id + 1) % users.length;
-
-    var userImage = document.getElementById("user-image");
-    userImage.src = users[id].img;
-
-    var userName = document.getElementById("user-name");
-    userName.innerHTML = users[id].name;
-
-    var userGender = document.getElementById("user-gender");
-    userGender.innerHTML = users[id].gender;
-
-    var userCountry = document.getElementById("user-country");
-    userCountry.innerHTML = users[id].country;
-
-    var userAge = document.getElementById("user-age");
-   userAge.innerHTML = "Age: " + users[id].age;
+    displayUser(users[id]);
 }
+
+/* =========================
+   RANDOM USER
+   ========================= */
 
 function randomuser() {
     fetch("https://randomuser.me/api/")
-        .then(function(response) {
-            return response.json();
+        .then(response => response.json())
+        .then(data => {
+            const user = data.results[0];
+
+            randomUserHistory.push(user);
+
+            if (randomUserHistory.length > MAX_HISTORY) {
+                randomUserHistory.shift();
+            }
+
+            historyIndex = randomUserHistory.length - 1;
+
+            displayRandomUser(user);
         })
-        .then(function(data) {
-            var usersData = data.results[0];
-
-            var userImage = document.getElementById("user-image");
-            userImage.src = usersData.picture.large;
-
-            var userName = document.getElementById("user-name");
-            userName.innerHTML =
-                usersData.name.first + " " + usersData.name.last;
-
-            var userGender = document.getElementById("user-gender");
-
-var genderSymbol = "";
-if (usersData.gender === "male") {
-    genderSymbol = " ♂️";
-} else if (usersData.gender === "female") {
-    genderSymbol = " ♀️";
-}
-
-userGender.innerHTML = usersData.gender + genderSymbol;
-
-            var userCountry = document.getElementById("user-country");
-            userCountry.innerHTML = usersData.location.country;
-
-            var userAge = document.getElementById("user-age");
-userAge.innerHTML = "Age: " + usersData.dob.age;
-        })
-        .catch(function(err) {
-            console.log("Error:", err);
+        .catch(error => {
+            console.log("Error:", error);
         });
 }
+
+/* =========================
+   PREVIOUS RANDOM USER
+   ========================= */
+
+function previousRandomUser() {
+    if (historyIndex > 0) {
+        historyIndex--;
+        displayRandomUser(
+            randomUserHistory[historyIndex]
+        );
+    } else {
+        alert("No older random users available");
+    }
+}
+
+/* =========================
+   NEXT RANDOM USER
+   ========================= */
+
+function nextRandomUser() {
+    if (
+        historyIndex <
+        randomUserHistory.length - 1
+    ) {
+        historyIndex++;
+        displayRandomUser(
+            randomUserHistory[historyIndex]
+        );
+    } else {
+        alert("No newer random users available");
+    }
+}
+
+/* =========================
+   THEME TOGGLE
+   ========================= */
+
 function toggleTheme() {
     document.body.classList.toggle("light-mode");
 
@@ -98,12 +156,16 @@ function toggleTheme() {
     }
 }
 
-window.onload = function () {
+
+
+window.addEventListener("load", () => {
     const theme = localStorage.getItem("theme");
 
     if (theme === "light") {
         document.body.classList.add("light-mode");
-        document.getElementById("theme-btn").innerHTML = "🌙 Dark Mode";
+        document.getElementById("theme-btn").innerHTML =
+            "🌙 Dark Mode";
     }
-};
 
+    displayUser(users[0]);
+});

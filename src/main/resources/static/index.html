@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,18 +13,18 @@
         <a href="https://github.com/" target="_blank">Github</a>
         <a href="https://leetcode.com/" target="_blank">Leetcode</a>
         <a href="#">Autosuggest</a>
+        <a href="codeforces-stats.html" target="_blank">Codeforces Stats</a>
+        <a href="gitpulse.html" target="_blank">GitPulse</a>
+        <a href="ask-gemini.html" target="_blank">Ask Gemini</a>
+        <a href="leetcode-stats.html" target="_blank">Leetcode Stats</a>
+
         <button id="theme-btn" onclick="toggleTheme()">
-    ☀️ White Mode
-</button>
+            ☀️ White Mode
+        </button>
     </div>
 
     <div class="card">
-        <img
-            id="user-image"
-            src="john.png"
-            alt="User Image"
-            width="200"
-        >
+        <img id="user-image" src="john.png" alt="User Image">
 
         <h3 id="user-name">John Doe</h3>
 
@@ -33,19 +32,24 @@
 
         <p id="user-country">USA</p>
 
-        
-
-        <p id="user-age">AGE: 30</p>
+        <p id="user-age">Age: 30</p>
 
         <button onclick="toggle()">👤 Toggle User</button>
 
         <br><br>
 
         <button onclick="randomuser()">🎲 Random User</button>
+
+        <br><br>
+
+        <button onclick="previousRandomUser()">⬅️ Previous Random</button>
+
+        <br><br>
+
+        <button onclick="nextRandomUser()">➡️ Next Random</button>
     </div>
 
     <script src="index.js"></script>
 
 </body>
 </html>
-
